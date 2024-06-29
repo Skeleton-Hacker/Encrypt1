@@ -1,5 +1,4 @@
 import os
-from primePy import primes
 
 string = ["a", "b", "c", "d"] # choose the public string you want for the encryption
 prime_1 = 1 # choose the public prime you want for the encryption
@@ -17,32 +16,20 @@ def key1(char):
 def key2(key):
     passkey = 1
     for char in key:
-        passkey *= ord(char)
-        passkey += ord(string[0])
+        passkey += ord(char)
+        passkey *= ord(string[0])
         dummy = string[0]
         string.pop()
         string.append(dummy)
     return passkey
 
-def get_greatest_prime(number):
-    num = number
-    flag = 1
-    while flag:
-        prime = primes.between(num, num+number)
-        try:
-            flag = 0
-            return prime[0]
-        except:
-            num += number
-
 def encrypt(message):
     encrypted = []
     prime_2 = int(input("Enter passkey: ")) # choose the private prime you want for the encryption
-    key = get_greatest_prime(key2(list(input("Enter key: ").strip()))) # choose the private string you want for the encryption
+    key = (key2(list(input("Enter key: ").strip()))) # choose the private string you want for the encryption
     addend = 0
     for char in message:
-        addend += prime_2 # choose the incremental u want to be used
-        string.append(char)
+        addend *= prime_2 # choose the incremental u want to be used
         dummy = (key1(char)+addend)*key
         dummy *= prime_1
         to_append = hex(dummy)
@@ -50,16 +37,16 @@ def encrypt(message):
     return encrypted
 
 def writer(message, file):
-    with open(file, "a") as output:
+    with open(file, "w") as output:
         for code in message:
             output.write(code)
 
 def main():
-    input_file = input("Enter filename to be encrypted: ")
-    message = reader(input_file)
+    input_file = input("Enter filename to be encrypted: ").strip()
+    format = input("Enter the file format: ").strip()
+    message = reader(input_file + '.' + format)
     encrypted_message = encrypt(message)
-    file = input("Choose name of file: ") + ".txt"
-    output_file = os.path.join(file)
+    output_file = os.path.join(input_file + "_encrypted." + format)
     writer(encrypted_message, output_file)
 
 if __name__ == "__main__":
