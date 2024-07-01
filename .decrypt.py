@@ -50,7 +50,7 @@ def writer(message, file):
 def main():
     input_file = input("Enter the filename to be decrypted: ").strip()
     format = input("Enter the file format: ").strip()
-    message = reader(input_file + '_encrypted.' + format)
+    message = reader(input_file + format)
     decrypted_message = decrypt(message)
     output_file = os.path.join(input_file + "_decrypted." + format)
     writer(decrypted_message, output_file)
