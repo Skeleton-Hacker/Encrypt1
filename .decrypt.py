@@ -32,7 +32,7 @@ def decrypt(message):
     decrypted = []
     prime_2 = int(input("Enter passkey: ")) # choose the private prime you want for the encryption
     key = (key2(list(input("Enter key: ").strip()))) # choose the private string you want for the encryption
-    addend = 0
+    addend = 1
     for num in message:
         addend *= prime_2
         to_append = int(num, 16)

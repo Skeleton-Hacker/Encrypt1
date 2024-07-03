@@ -27,7 +27,7 @@ def encrypt(message):
     encrypted = []
     prime_2 = int(input("Enter passkey: ")) # choose the private prime you want for the encryption
     key = (key2(list(input("Enter key: ").strip()))) # choose the private string you want for the encryption
-    addend = 0
+    addend = 1
     for char in message:
         addend *= prime_2 # choose the incremental u want to be used
         dummy = (key1(char)+addend)*key
